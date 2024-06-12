@@ -1,0 +1,6 @@
+apiVersion: example.org/v1alpha1
+kind: Cm
+metadata: 
+  name: testcm
+spec:
+  name: testcm

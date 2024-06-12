@@ -23,3 +23,25 @@ spec:
             properties:
               name:
                 type: string
+---
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+spec:
+  compositeTypeRef:
+    apiVersion: example.org/v1alpha1
+    kind: XCm
+  resources:
+    - name: CM
+      base:
+        apiVersion: kubernetes.crossplane.io/v1alpha1
+        kind: Object
+        metadata:
+          name: foo
+        spec:
+          forProvider:
+            manifest:
+              apiVersion: v1
+              kind: ConfigMap
+              metadata:
+                namespace: default
+          managementPolicy: ObserveDelete

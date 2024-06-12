@@ -6,7 +6,5 @@ spec:
   containers:
     - name: test
       image: registry.k8s.io/busybox
-      command:
-        - ls
-        - "-l"
-        - "/etc/secret-volume"
+      command: ["/bin/sh"]
+      args: ["-c","while true; do echo hello; sleep 1000;done"]

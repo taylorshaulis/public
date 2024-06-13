@@ -59,4 +59,37 @@ spec:
                 user-interface.properties: |
                   color.good=purple
                   color.bad=yellow
-                  allow.textmode=true  
+                  allow.textmode=true
+    - name: policy
+      base:
+        apiVersion: kubernetes.crossplane.io/v1alpha1
+        kind: Object
+        metadata:
+          name: foopolicy
+        spec:
+          forProvider:
+            manifest:
+              apiVersion: kyverno.io/v1
+              kind: ClusterPolicy
+              metadata:
+                name: xcm-name-xrd  
+              spec:
+                validationFailureAction: enforce
+                background: true
+                rules:
+                  - name: xcm-name
+                    match:
+                      any:
+                      - resources:
+                          kinds:
+                          - example.org/v1alpha1/Cm
+                    validate:
+                      message: >-
+                        name should be set to awesomes!          
+                      deny:
+                        conditions:
+                          any:
+                          - key: {{ printf "{{ request.object.spec.name }}" }}
+                            operator: NotEquals
+                            value: awesome
+                            message: Spec.name must be set to "awesome"

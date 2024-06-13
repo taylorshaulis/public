@@ -4,3 +4,10 @@ metadata:
   name: testcm
 spec:
   name: awesome
+---
+apiVersion: example.org/v1alpha1
+kind: Cmnorule
+metadata: 
+  name: testcm
+spec:
+  name: awesome

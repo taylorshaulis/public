@@ -3,4 +3,4 @@ kind: Cm
 metadata: 
   name: testcm
 spec:
-  name: testcm
+  name: awesome

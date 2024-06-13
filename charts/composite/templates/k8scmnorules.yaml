@@ -1,0 +1,65 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata: 
+  name: xcmnorule.example.org
+spec:
+  group: example.org
+  names:
+    kind: XCmnorule
+    plural: xcmnorule
+  claimNames:
+    kind: Cmnorule
+    plural: cmnorule
+  versions:
+  - name: v1alpha1
+    served: true
+    referenceable: true
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          spec:
+            type: object
+            properties:
+              name:
+                type: string
+---
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: xcmnorule.example.org
+spec:
+  compositeTypeRef:
+    apiVersion: example.org/v1alpha1
+    kind: XCmnorule
+  resources:
+    - name: CM
+      base:
+        apiVersion: kubernetes.crossplane.io/v1alpha1
+        kind: Object
+        metadata:
+          name: foo
+        spec:
+          forProvider:
+            manifest:
+              apiVersion: v1
+              kind: ConfigMap
+              metadata:
+                namespace: default
+                name: compositioncmnorule
+              data:
+                # property-like keys; each key maps to a simple value
+                player_initial_lives: "3"
+                ui_properties_file_name: "user-interface.properties"
+              
+                # file-like keys
+                game.properties: |
+                  enemy.types=aliens,monsters
+                  player.maximum-lives=5    
+                user-interface.properties: |
+                  color.good=purple
+                  color.bad=yellow
+                  allow.textmode=true
+      patches:
+        - fromFieldPath: spec.name
+          toFieldPath: spec.forProvider.manifest.metadata[name]

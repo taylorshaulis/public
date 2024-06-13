@@ -89,7 +89,7 @@ spec:
                       deny:
                         conditions:
                           any:
-                          - key: {{ printf "{{ request.object.spec.name }}" }}
+                          - key: {{`"{{ request.object.spec.name }}"`}}
                             operator: NotEquals
                             value: awesome
                             message: Spec.name must be set to "awesome"

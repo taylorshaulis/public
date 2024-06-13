@@ -1,9 +1,11 @@
-# apiVersion: example.org/v1alpha1
-# kind: Cm
-# metadata: 
-#   name: testcm
-# spec:
-#   name: awesome
+apiVersion: example.org/v1alpha1
+kind: Cm
+metadata: 
+  name: testcm
+  labels:
+    kyvernoname: foobar
+spec:
+  name: awesome
 # ---
 # apiVersion: example.org/v1alpha1
 # kind: Cmnorule

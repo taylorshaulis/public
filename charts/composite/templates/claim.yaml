@@ -1,27 +1,27 @@
-apiVersion: example.org/v1alpha1
-kind: Cm
-metadata: 
-  name: testcm
-spec:
-  name: awesome
----
-apiVersion: example.org/v1alpha1
-kind: Cmnorule
-metadata: 
-  name: testcm
-spec:
-  name: awesome
----
-apiVersion: example.org/v1alpha1
-kind: Cm
-metadata: 
-  name: testcmtwo
-spec:
-  name: yolo
----
-apiVersion: example.org/v1alpha1
-kind: Cmnorule
-metadata: 
-  name: testcmnorule2
-spec:
-  name: yolonorule
+# apiVersion: example.org/v1alpha1
+# kind: Cm
+# metadata: 
+#   name: testcm
+# spec:
+#   name: awesome
+# ---
+# apiVersion: example.org/v1alpha1
+# kind: Cmnorule
+# metadata: 
+#   name: testcm
+# spec:
+#   name: awesome
+# ---
+# apiVersion: example.org/v1alpha1
+# kind: Cm
+# metadata: 
+#   name: testcmtwo
+# spec:
+#   name: yolo
+# ---
+# apiVersion: example.org/v1alpha1
+# kind: Cmnorule
+# metadata: 
+#   name: testcmnorule2
+# spec:
+#   name: yolonorule

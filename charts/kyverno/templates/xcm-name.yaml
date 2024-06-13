@@ -1,24 +1,24 @@
-apiVersion: kyverno.io/v1
-kind: ClusterPolicy
-metadata:
-  name: xcm-name  
-spec:
-  validationFailureAction: enforce
-  background: true
-  rules:
-    - name: xcm-name
-      match:
-        any:
-        - resources:
-            kinds:
-            - example.org/v1alpha1/Cm
-      validate:
-        message: >-
-          name should be set to awesomes!          
-        deny:
-          conditions:
-            any:
-            - key: {{ printf "{{ request.object.spec.name }}" }}
-              operator: NotEquals
-              value: awesome
-              message: Spec.name must be set to "awesome"
+# apiVersion: kyverno.io/v1
+# kind: ClusterPolicy
+# metadata:
+#   name: xcm-name  
+# spec:
+#   validationFailureAction: enforce
+#   background: true
+#   rules:
+#     - name: xcm-name
+#       match:
+#         any:
+#         - resources:
+#             kinds:
+#             - example.org/v1alpha1/Cm
+#       validate:
+#         message: >-
+#           name should be set to awesomes!          
+#         deny:
+#           conditions:
+#             any:
+#             - key: {{ printf "{{ request.object.spec.name }}" }}
+#               operator: NotEquals
+#               value: awesome
+#               message: Spec.name must be set to "awesome"

@@ -107,6 +107,8 @@ applications:
     project: aoa
     finalizers:
       - resources-finalizer.argocd.argoproj.io
+    additionalAnnotations:
+      argocd.argoproj.io/sync-wave: "5"
     source:
       repoURL: https://github.com/taylorshaulis/public.git
       targetRevision: HEAD

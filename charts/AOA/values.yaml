@@ -40,24 +40,26 @@ applications:
       - CreateNamespace=true
       - PruneLast=true
       - ServerSideApply=true
-  # crossplane:
-  #   namespace: argocd
-  #   project: aoa
-  #   source:
-  #     repoURL: https://kyverno.github.io/kyverno
-  #     targetRevision: 3.2.4
-  #     chart: kyverno
-  #   destination:
-  #     server: https://kubernetes.default.svc
-  #     namespace: kyverno
-  #   syncPolicy:
-  #     automated:
-  #       prune: true
-  #       selfHeal: true
-  #       allowEmpty: true
-  #     syncOptions:
-  #     - CreateNamespace=true
-  #     - PruneLast=true
+  crossplane:
+    namespace: argocd
+    project: aoa
+    finalizers:
+      - resources-finalizer.argocd.argoproj.io
+    source:
+      repoURL: https://charts.crossplane.io/master/
+      targetRevision: 1.17.0-rc.0.208.g69fd693a
+      chart: crossplane
+    destination:
+      server: https://kubernetes.default.svc
+      namespace: crossplane-system
+    syncPolicy:
+      automated:
+        prune: true
+        selfHeal: true
+        allowEmpty: true
+      syncOptions:
+      - CreateNamespace=true
+      - PruneLast=true
 
 projects:
   aoa:

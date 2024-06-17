@@ -23,6 +23,7 @@ applications:
     source:
       repoURL: https://kyverno.github.io/kyverno
       targetRevision: 3.2.4
+      chart: kyverno
     destination:
       server: https://kubernetes.default.svc
       namespace: kyverno

@@ -1,6 +1,6 @@
 applications:
   helloworld:
-    namespace: helloworld
+    namespace: argocd
     project: aoa
     source:
       repoURL: https://github.com/taylorshaulis/public.git

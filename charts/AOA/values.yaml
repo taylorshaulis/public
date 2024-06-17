@@ -45,6 +45,8 @@ applications:
     project: aoa
     finalizers:
       - resources-finalizer.argocd.argoproj.io
+    additionalAnnotations:
+      argocd.argoproj.io/sync-wave: "1"
     source:
       repoURL: https://charts.crossplane.io/master/
       targetRevision: 1.17.0-rc.0.208.g69fd693a
@@ -65,6 +67,8 @@ applications:
     project: aoa
     finalizers:
       - resources-finalizer.argocd.argoproj.io
+    additionalAnnotations:
+      argocd.argoproj.io/sync-wave: "2"
     source:
       repoURL: https://github.com/taylorshaulis/public.git
       targetRevision: HEAD
@@ -86,6 +90,8 @@ applications:
     project: aoa
     finalizers:
       - resources-finalizer.argocd.argoproj.io
+    additionalAnnotations:
+      argocd.argoproj.io/sync-wave: "3"
     source:
       repoURL: https://github.com/taylorshaulis/public.git
       targetRevision: HEAD
@@ -108,7 +114,7 @@ applications:
     finalizers:
       - resources-finalizer.argocd.argoproj.io
     additionalAnnotations:
-      argocd.argoproj.io/sync-wave: "5"
+      argocd.argoproj.io/sync-wave: "4"
     source:
       repoURL: https://github.com/taylorshaulis/public.git
       targetRevision: HEAD
@@ -130,6 +136,8 @@ applications:
     project: aoa
     finalizers:
       - resources-finalizer.argocd.argoproj.io
+    additionalAnnotations:
+      argocd.argoproj.io/sync-wave: "5"
     source:
       repoURL: https://github.com/taylorshaulis/public.git
       targetRevision: HEAD

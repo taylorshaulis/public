@@ -80,6 +80,7 @@ applications:
       syncOptions:
       - CreateNamespace=true
       - PruneLast=true
+      - ApplyOutOfSyncOnly=true
 
 projects:
   aoa:

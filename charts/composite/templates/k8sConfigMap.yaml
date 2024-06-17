@@ -1,95 +1,95 @@
-apiVersion: apiextensions.crossplane.io/v1
-kind: CompositeResourceDefinition
-metadata: 
-  name: xcm.example.org
-spec:
-  group: example.org
-  names:
-    kind: XCm
-    plural: xcm
-  claimNames:
-    kind: Cm
-    plural: cm
-  versions:
-  - name: v1alpha1
-    served: true
-    referenceable: true
-    schema:
-      openAPIV3Schema:
-        type: object
-        properties:
-          spec:
-            type: object
-            properties:
-              name:
-                type: string
----
-apiVersion: apiextensions.crossplane.io/v1
-kind: Composition
-metadata:
-  name: xcm.example.org
-spec:
-  compositeTypeRef:
-    apiVersion: example.org/v1alpha1
-    kind: XCm
-  resources:
-    - name: CM
-      base:
-        apiVersion: kubernetes.crossplane.io/v1alpha1
-        kind: Object
-        metadata:
-          name: foo
-        spec:
-          forProvider:
-            manifest:
-              apiVersion: v1
-              kind: ConfigMap
-              metadata:
-                namespace: default
-                name: compositioncm
-              data:
-                # property-like keys; each key maps to a simple value
-                player_initial_lives: "3"
-                ui_properties_file_name: "user-interface.properties"
+# apiVersion: apiextensions.crossplane.io/v1
+# kind: CompositeResourceDefinition
+# metadata: 
+#   name: xcm.example.org
+# spec:
+#   group: example.org
+#   names:
+#     kind: XCm
+#     plural: xcm
+#   claimNames:
+#     kind: Cm
+#     plural: cm
+#   versions:
+#   - name: v1alpha1
+#     served: true
+#     referenceable: true
+#     schema:
+#       openAPIV3Schema:
+#         type: object
+#         properties:
+#           spec:
+#             type: object
+#             properties:
+#               name:
+#                 type: string
+# ---
+# apiVersion: apiextensions.crossplane.io/v1
+# kind: Composition
+# metadata:
+#   name: xcm.example.org
+# spec:
+#   compositeTypeRef:
+#     apiVersion: example.org/v1alpha1
+#     kind: XCm
+#   resources:
+#     - name: CM
+#       base:
+#         apiVersion: kubernetes.crossplane.io/v1alpha1
+#         kind: Object
+#         metadata:
+#           name: foo
+#         spec:
+#           forProvider:
+#             manifest:
+#               apiVersion: v1
+#               kind: ConfigMap
+#               metadata:
+#                 namespace: default
+#                 name: compositioncm
+#               data:
+#                 # property-like keys; each key maps to a simple value
+#                 player_initial_lives: "3"
+#                 ui_properties_file_name: "user-interface.properties"
               
-                # file-like keys
-                game.properties: |
-                  enemy.types=aliens,monsters
-                  player.maximum-lives=5    
-                user-interface.properties: |
-                  color.good=purple
-                  color.bad=yellow
-                  allow.textmode=true
-    - name: policy
-      base:
-        apiVersion: kubernetes.crossplane.io/v1alpha1
-        kind: Object
-        metadata:
-          name: foopolicy
-        spec:
-          forProvider:
-            manifest:
-              apiVersion: kyverno.io/v1
-              kind: ClusterPolicy
-              metadata:
-                name: xcm-name-xrd  
-              spec:
-                validationFailureAction: enforce
-                background: true
-                rules:
-                  - name: xcm-name
-                    match:
-                      any:
-                      - resources:
-                          kinds:
-                          - example.org/v1alpha1/Cm
-                    validate:
-                      message: >-
-                        name should be set to awesomes!          
-                      deny:
-                        conditions:
-                          any:
-                          - key: {{`"{{ request.object.spec.name }}"`}}
-                            operator: NotEquals
-                            value: awesome
-                            message: Spec.name must be set to "awesome"
+#                 # file-like keys
+#                 game.properties: |
+#                   enemy.types=aliens,monsters
+#                   player.maximum-lives=5    
+#                 user-interface.properties: |
+#                   color.good=purple
+#                   color.bad=yellow
+#                   allow.textmode=true
+#     - name: policy
+#       base:
+#         apiVersion: kubernetes.crossplane.io/v1alpha1
+#         kind: Object
+#         metadata:
+#           name: foopolicy
+#         spec:
+#           forProvider:
+#             manifest:
+#               apiVersion: kyverno.io/v1
+#               kind: ClusterPolicy
+#               metadata:
+#                 name: xcm-name-xrd  
+#               spec:
+#                 validationFailureAction: enforce
+#                 background: true
+#                 rules:
+#                   - name: xcm-name
+#                     match:
+#                       any:
+#                       - resources:
+#                           kinds:
+#                           - example.org/v1alpha1/Cm
+#                     validate:
+#                       message: >-
+#                         name should be set to awesomes!          
+#                       deny:
+#                         conditions:
+#                           any:
+#                           - key: {{`"{{ request.object.spec.name }}"`}}
+#                             operator: NotEquals
+#                             value: awesome
+#                             message: Spec.name must be set to "awesome"

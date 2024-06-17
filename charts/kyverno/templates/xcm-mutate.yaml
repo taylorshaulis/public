@@ -1,17 +1,17 @@
-apiVersion: kyverno.io/v1
-kind: ClusterPolicy
-metadata:
-  name: xcm-mutate 
-spec:
-  rules:
-    - name: xcm-mutate
-      match:
-        any:
-        - resources:
-            kinds:
-            - example.org/v1alpha1/Cm
-      mutate:
-        patchStrategicMerge:
-          metadata:
-            labels:
-              kyvernoname: "{{request.object.metadata.name}}"
+# apiVersion: kyverno.io/v1
+# kind: ClusterPolicy
+# metadata:
+#   name: xcm-mutate 
+# spec:
+#   rules:
+#     - name: xcm-mutate
+#       match:
+#         any:
+#         - resources:
+#             kinds:
+#             - example.org/v1alpha1/Cm
+#       mutate:
+#         patchStrategicMerge:
+#           metadata:
+#             labels:
+#               kyvernoname: "{{request.object.metadata.name}}"

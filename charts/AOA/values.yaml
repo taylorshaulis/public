@@ -1,4 +1,22 @@
-applications: {}
+applications:
+  helloworld:
+    namespace: helloworld
+    project: aoa
+    source:
+      repoURL: https://github.com/taylorshaulis/public.git
+      targetRevision: HEAD
+      path: charts/helloworld
+    destination:
+      server: https://kubernetes.default.svc
+      namespace: helloworld
+    syncPolicy:
+      automated:
+        prune: true
+        selfHeal: true
+        allowEmpty: true
+      syncOptions:
+      - CreateNamespace=true
+      - PruneLast=true
 #  guestbook:
 #    namespace: argocd
 #    additionalLabels: {}

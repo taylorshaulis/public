@@ -45,7 +45,8 @@ projects:
     sourceRepos:
     - '*'
     destinations:
-    - '*'
+    - namespace: argocd
+      server: https://kubernetes.default.svc
     sourceNamespaces:
     - argocd
 #  guestbook:

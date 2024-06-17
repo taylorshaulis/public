@@ -67,6 +67,12 @@ projects:
       server: https://kubernetes.default.svc
     sourceNamespaces:
     - argocd
+    clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+    namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
 #  guestbook:
 #    namespace: argocd
 #    additionalLabels: {}

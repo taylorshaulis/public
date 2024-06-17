@@ -63,7 +63,7 @@ projects:
     sourceRepos:
     - '*'
     destinations:
-    - namespace: argocd
+    - namespace: '*'
       server: https://kubernetes.default.svc
     sourceNamespaces:
     - argocd

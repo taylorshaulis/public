@@ -17,6 +17,23 @@ applications:
       syncOptions:
       - CreateNamespace=true
       - PruneLast=true
+  kyverno:
+    namespace: argocd
+    project: aoa
+    source:
+      repoURL: https://kyverno.github.io/kyverno
+      targetRevision: 3.2.4
+    destination:
+      server: https://kubernetes.default.svc
+      namespace: kyverno
+    syncPolicy:
+      automated:
+        prune: true
+        selfHeal: true
+        allowEmpty: true
+      syncOptions:
+      - CreateNamespace=true
+      - PruneLast=true
 #  guestbook:
 #    namespace: argocd
 #    additionalLabels: {}

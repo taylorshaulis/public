@@ -1,25 +1,27 @@
 applications:
-  helloworld:
-    namespace: argocd
-    project: aoa
-    source:
-      repoURL: https://github.com/taylorshaulis/public.git
-      targetRevision: HEAD
-      path: charts/helloworld
-    destination:
-      server: https://kubernetes.default.svc
-      namespace: helloworld
-    syncPolicy:
-      automated:
-        prune: true
-        selfHeal: true
-        allowEmpty: true
-      syncOptions:
-      - CreateNamespace=true
-      - PruneLast=true
+  # helloworld:
+  #   namespace: argocd
+  #   project: aoa
+  #   source:
+  #     repoURL: https://github.com/taylorshaulis/public.git
+  #     targetRevision: HEAD
+  #     path: charts/helloworld
+  #   destination:
+  #     server: https://kubernetes.default.svc
+  #     namespace: helloworld
+  #   syncPolicy:
+  #     automated:
+  #       prune: true
+  #       selfHeal: true
+  #       allowEmpty: true
+  #     syncOptions:
+  #     - CreateNamespace=true
+  #     - PruneLast=true
   # kyverno:
   #   namespace: argocd
   #   project: aoa
+  #   finalizers:
+  #     - resources-finalizer.argocd.argoproj.io
   #   source:
   #     repoURL: https://kyverno.github.io/kyverno
   #     targetRevision: 3.2.4

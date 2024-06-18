@@ -62,29 +62,29 @@ applications:
       syncOptions:
       - CreateNamespace=true
       - PruneLast=true
-  crossplane-providers:
-    namespace: argocd
-    project: aoa
-    finalizers:
-      - resources-finalizer.argocd.argoproj.io
-    additionalAnnotations:
-      argocd.argoproj.io/sync-wave: "2"
-    source:
-      repoURL: https://github.com/taylorshaulis/public.git
-      targetRevision: HEAD
-      path: charts/crossplane-providers
-    destination:
-      server: https://kubernetes.default.svc
-      namespace: crossplane-system
-    syncPolicy:
-      automated:
-        prune: true
-        selfHeal: true
-        allowEmpty: true
-      syncOptions:
-      - CreateNamespace=true
-      - PruneLast=true
-      - ApplyOutOfSyncOnly=true
+  # crossplane-providers:
+  #   namespace: argocd
+  #   project: aoa
+  #   finalizers:
+  #     - resources-finalizer.argocd.argoproj.io
+  #   additionalAnnotations:
+  #     argocd.argoproj.io/sync-wave: "2"
+  #   source:
+  #     repoURL: https://github.com/taylorshaulis/public.git
+  #     targetRevision: HEAD
+  #     path: charts/crossplane-providers
+  #   destination:
+  #     server: https://kubernetes.default.svc
+  #     namespace: crossplane-system
+  #   syncPolicy:
+  #     automated:
+  #       prune: true
+  #       selfHeal: true
+  #       allowEmpty: true
+  #     syncOptions:
+  #     - CreateNamespace=true
+  #     - PruneLast=true
+  #     - ApplyOutOfSyncOnly=true
   # crossplane-provider-config:
   #   namespace: argocd
   #   project: aoa

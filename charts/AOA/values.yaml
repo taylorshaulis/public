@@ -156,21 +156,21 @@ applications:
   #     - ApplyOutOfSyncOnly=true
 
 projects:
-  aoa:
-    namespace: argocd
-    sourceRepos:
-    - '*'
-    destinations:
-    - namespace: '*'
-      server: https://kubernetes.default.svc
-    sourceNamespaces:
-    - argocd
-    clusterResourceWhitelist:
-    - group: '*'
-      kind: '*'
-    namespaceResourceWhitelist:
-    - group: '*'
-      kind: '*'
+  # aoa:
+  #   namespace: argocd
+  #   sourceRepos:
+  #   - '*'
+  #   destinations:
+  #   - namespace: '*'
+  #     server: https://kubernetes.default.svc
+  #   sourceNamespaces:
+  #   - argocd
+  #   clusterResourceWhitelist:
+  #   - group: '*'
+  #     kind: '*'
+  #   namespaceResourceWhitelist:
+  #   - group: '*'
+  #     kind: '*'
 #  guestbook:
 #    namespace: argocd
 #    additionalLabels: {}

@@ -1,0 +1,88 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata: 
+  name: xcm.example.org
+spec:
+  group: example.org
+  names:
+    kind: XCm
+    plural: xcm
+  claimNames:
+    kind: Cm
+    plural: cm
+  versions:
+  - name: v1alpha1
+    served: true
+    referenceable: true
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          spec:
+            type: object
+            properties:
+              name:
+                type: string
+              cmtwoname:
+                type: string
+---
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: xcm.example.org
+spec:
+  compositeTypeRef:
+    apiVersion: example.org/v1alpha1
+    kind: XCm
+  resources:
+    - name: CM
+      base:
+        apiVersion: kubernetes.crossplane.io/v1alpha1
+        kind: Object
+        spec:
+          forProvider:
+            manifest:
+              apiVersion: v1
+              kind: ConfigMap
+              metadata:
+                namespace: default
+                labels:
+                  specname: awesome
+              data:
+                # property-like keys; each key maps to a simple value
+                player_initial_lives: "3"
+      patches:
+        - type: FromCompositeFieldPath
+          fromFieldPath: spec.name
+          toFieldPath: metadata.labls[specname]
+        - type: FromCompositeFieldPath
+          fromFieldPath: spec.name
+          toFieldPath: spec.forProvider.manifest.metadata.labls[specname]
+    - name: CMTWO
+      base:
+        apiVersion: kubernetes.crossplane.io/v1alpha1
+        kind: Object
+        spec:
+          forProvider:
+            manifest:
+              apiVersion: v1
+              kind: ConfigMap
+              metadata:
+                namespace: default
+              data:
+                # property-like keys; each key maps to a simple value
+                player_initial_lives: "4"
+      patches:
+        - type: FromCompositeFieldPath
+          fromFieldPath: spec.name
+          toFieldPath: metadata.labels.specname
+        - type: FromCompositeFieldPath
+          fromFieldPath: spec.name
+          toFieldPath: spec.forProvider.manifest.metadata.labls[specname]
+        - type: FromCompositeFieldPath
+          fromFieldPath: spec.cmtwoname
+          toFieldPath: metadata.labels.specname
+        - type: FromCompositeFieldPath
+          fromFieldPath: spec.cmtwoname
+          toFieldPath: spec.forProvider.manifest.metadata.labls[specname]
+

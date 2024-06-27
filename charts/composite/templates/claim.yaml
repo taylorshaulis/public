@@ -1,23 +1,28 @@
-# apiVersion: example.org/v1alpha1
-# kind: Cm
-# metadata: 
-#   name: testcm
-# spec:
-#   name: awesome
-# ---
-# apiVersion: example.org/v1alpha1
-# kind: Cmnorule
-# metadata: 
-#   name: testcm
-# spec:
-#   name: awesome
-# ---
-# apiVersion: example.org/v1alpha1
-# kind: Cm
-# metadata: 
-#   name: testcmtwo
-# spec:
-#   name: yolo
+apiVersion: example.org/v1alpha1
+kind: Cm
+metadata: 
+  name: testcm
+spec:
+  name: awesome
+---
+apiVersion: example.org/v1alpha1
+kind: Cmnorule
+metadata: 
+  name: testcm
+spec:
+  name: awesome
+  cmtwoname: "no"
+
+---
+apiVersion: example.org/v1alpha1
+kind: Cm
+metadata: 
+  name: testcmtwo
+spec:
+  name: yolo
+  nodegroup4:
+    tags: "mytag"
+    nodesize: "t3.large"
 # ---
 # apiVersion: example.org/v1alpha1
 # kind: Cmnorule
